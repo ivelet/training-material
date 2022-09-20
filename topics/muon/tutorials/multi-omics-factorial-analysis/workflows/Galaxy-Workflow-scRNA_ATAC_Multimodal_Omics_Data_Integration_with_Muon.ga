@@ -1,0 +1,371 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Perform multimodal omics data integration with muon using AnnData objects of respective modalities ",
+    "format-version": "0.1",
+    "name": "Multimodal Omics Data Integration with Muon (imported from uploaded file)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "mudata_import",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Create MuData from AnnData",
+                    "name": "atac_input"
+                },
+                {
+                    "description": "runtime parameter for tool Create MuData from AnnData",
+                    "name": "rna_input"
+                }
+            ],
+            "label": "Combine modalities into a MuData object",
+            "name": "Create MuData from AnnData",
+            "outputs": [
+                {
+                    "name": "rna_atac",
+                    "type": "h5mu"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 97.484375
+            },
+            "post_job_actions": {},
+            "tool_id": "mudata_import",
+            "tool_state": "{\"atac_input\": {\"__class__\": \"RuntimeValue\"}, \"first_modality\": {\"first_modality\": \"rna\", \"__current_case__\": 0, \"rna_name\": \"rna\"}, \"rna_input\": {\"__class__\": \"RuntimeValue\"}, \"second_modality\": {\"second_modality\": \"atac\", \"__current_case__\": 1, \"atac_name\": \"atac\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "7a3bf45a-a300-4246-94df-c7bee4fb62e1",
+            "workflow_outputs": [
+                {
+                    "label": "MuData",
+                    "output_name": "rna_atac",
+                    "uuid": "df5790c0-d499-43b2-911b-294919d6f7ac"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "mofa",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "rna_atac_input": {
+                    "id": 0,
+                    "output_name": "rna_atac"
+                }
+            },
+            "inputs": [],
+            "label": "Perform Multi Omics Factorial Analysis",
+            "name": "Multi Omics Factorial Analysis with Muon",
+            "outputs": [
+                {
+                    "name": "rna_atac_integration",
+                    "type": "h5mu"
+                },
+                {
+                    "name": "umap_plot",
+                    "type": "png"
+                },
+                {
+                    "name": "rna_mofa_annotations",
+                    "type": "png"
+                },
+                {
+                    "name": "atac_mofa_annotations",
+                    "type": "png"
+                },
+                {
+                    "name": "rna_atac_mofa_model",
+                    "type": "hdf5"
+                }
+            ],
+            "position": {
+                "left": 412.984375,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "mofa",
+            "tool_state": "{\"celltype_colors\": \"celltype_colors\", \"first_mod_annotation_name\": \"celltype\", \"first_mod_name\": \"rna\", \"load_mofax_model\": {\"load_mofax_model\": \"false\", \"__current_case__\": 1}, \"mofa_n_factors\": \"10\", \"mofa_plot_components\": \"1,2 . 3,4\", \"rna_atac_input\": {\"__class__\": \"ConnectedValue\"}, \"second_mod_annotation_name\": \"celltype\", \"second_mod_name\": \"atac\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "587a9a8c-e9be-4aea-9505-5a7eb87d378c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "rna_atac_integration",
+                    "uuid": "98acfd66-8c7b-403f-897b-7cab5fa679db"
+                },
+                {
+                    "label": null,
+                    "output_name": "umap_plot",
+                    "uuid": "f3926d5f-7070-46be-a9d0-51c795235eb4"
+                },
+                {
+                    "label": null,
+                    "output_name": "rna_mofa_annotations",
+                    "uuid": "83e914c1-1f82-426f-9568-da74d355f4b8"
+                },
+                {
+                    "label": null,
+                    "output_name": "atac_mofa_annotations",
+                    "uuid": "5ea70f4d-ab18-41bd-b0b7-8501f43632ed"
+                },
+                {
+                    "label": null,
+                    "output_name": "rna_atac_mofa_model",
+                    "uuid": "e745b47c-6540-49fc-8c96-8e1ac530b0d8"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Heatmap comparing cell type annotations of different modalities.",
+            "content_id": "compare_annotations",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "rna_atac_input": {
+                    "id": 0,
+                    "output_name": "rna_atac"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compare cell type annotations",
+            "outputs": [
+                {
+                    "name": "rna_atac_comparison_heatmap",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 410.984375,
+                "top": 370.125
+            },
+            "post_job_actions": {},
+            "tool_id": "compare_annotations",
+            "tool_state": "{\"first_mod_annotation_name\": \"rna:celltype\", \"first_mod_name\": \"rna\", \"mofa_plot_components\": \"1,2 . 3,4\", \"rna_atac_input\": {\"__class__\": \"ConnectedValue\"}, \"second_mod_annotation_name\": \"atac:celltype\", \"second_mod_name\": \"atac\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "37c0e5ac-74ae-4ba9-8c95-2b0d6bdda41a",
+            "workflow_outputs": [
+                {
+                    "label": "RNA ATAC Comparison Heatmap",
+                    "output_name": "rna_atac_comparison_heatmap",
+                    "uuid": "4bd8e6bc-f9ff-449d-b321-95c09af2ff3b"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "cluster_mofa_embeddings_with_mudata",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "rna_atac_mofa_input": {
+                    "id": 1,
+                    "output_name": "rna_atac_integration"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster MOFA Embeddings",
+            "outputs": [
+                {
+                    "name": "rna_atac_mofa_clustering",
+                    "type": "h5mu"
+                },
+                {
+                    "name": "figure_clustering",
+                    "type": "png"
+                },
+                {
+                    "name": "figure_individual_features",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 732.015625,
+                "top": 44.84375
+            },
+            "post_job_actions": {},
+            "tool_id": "cluster_mofa_embeddings_with_mudata",
+            "tool_state": "{\"clustering_method\": {\"clustering_method\": \"leiden\", \"__current_case__\": 0, \"resolution\": \"1.0\", \"random_state\": \"0\", \"key_added\": \"leiden_joint\", \"use_weights\": \"true\", \"n_iterations\": \"-1\"}, \"mu_umap_color\": \"KLF4, chr9:107480158-107492721\", \"rna_atac_mofa_input\": {\"__class__\": \"ConnectedValue\"}, \"sc_umap_legend_loc\": \"on data\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "bcdffa73-6123-4345-83d9-8b039c554aed",
+            "workflow_outputs": [
+                {
+                    "label": "MOFA embeddings with clustering",
+                    "output_name": "rna_atac_mofa_clustering",
+                    "uuid": "18a9a44e-24df-4eb8-812c-935f971524ea"
+                },
+                {
+                    "label": null,
+                    "output_name": "figure_clustering",
+                    "uuid": "6605e4d9-4b70-4f9f-a6b6-4b46a1dcb7e3"
+                },
+                {
+                    "label": null,
+                    "output_name": "figure_individual_features",
+                    "uuid": "22c414ce-6970-4d27-8e13-f136d7cc1894"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "rank_genes_and_peaks_muon",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "rna_atac_input": {
+                    "id": 3,
+                    "output_name": "rna_atac_mofa_clustering"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Rank and List Genes and Peaks in Multimodal Data with Scanpy",
+            "outputs": [
+                {
+                    "name": "ranked_rna_atac",
+                    "type": "h5mu"
+                },
+                {
+                    "name": "differentially_expressed_genes_accessible_peaks",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 728.046875,
+                "top": 361.078125
+            },
+            "post_job_actions": {},
+            "tool_id": "rank_genes_and_peaks_muon",
+            "tool_state": "{\"first_mod_name\": \"rna\", \"pd_display_max_columns\": \"200\", \"rank_genes_peaks_groupby\": \"leiden_joint\", \"rank_genes_peaks_method\": \"t-test_overestim_var\", \"rna_atac_input\": {\"__class__\": \"ConnectedValue\"}, \"second_mod_name\": \"atac\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "1f53738d-6c2f-4c19-bd51-8087100a5fac",
+            "workflow_outputs": [
+                {
+                    "label": "RNA ATAC with Ranked Genes and Peaks",
+                    "output_name": "ranked_rna_atac",
+                    "uuid": "136b7393-21bf-45d4-a515-adc09b84e89b"
+                },
+                {
+                    "label": null,
+                    "output_name": "differentially_expressed_genes_accessible_peaks",
+                    "uuid": "c8aadf5e-75d9-4530-9b25-80b56045293d"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "assign_cell_type_labels_mudata",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "rna_atac_input": {
+                    "id": 4,
+                    "output_name": "ranked_rna_atac"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Assign Cell Type Labels for MuData",
+            "outputs": [
+                {
+                    "name": "celltype_umap_plot",
+                    "type": "png"
+                },
+                {
+                    "name": "rna_atac_assigned_celltype_labels",
+                    "type": "h5mu"
+                }
+            ],
+            "position": {
+                "left": 1028.90625,
+                "top": 365.140625
+            },
+            "post_job_actions": {},
+            "tool_id": "assign_cell_type_labels_mudata",
+            "tool_state": "{\"get_cmap_name\": \"rainbow\", \"new_cluster_names_keys\": \"0,8,22,1,6,17,2,5,20,10,11,19,12,16,15,3,7,9,14,4,13,18,21\", \"new_cluster_names_values\": \"CD4+ na\\u00efve T, CD4+ na\\u00efve T, CD4+ na\\u00efve T, CD4+ memory T, CD4+ memory T, CD4+ memory T, CD8+ na\\u00efve T, CD8+ na\\u00efve T, CD8+ na\\u00efve T, CD8+ cytotoxic effector T, CD8+ transitional effector T, MAIT, NK, na\\u00efve B, memory B, classical mono, classical mono, classical mono, classical mono, intermediate mono, non-classical mono, mDC, pDC\", \"reorder_cat_list\": \"CD4+ na\\u00efve T,CD4+ memory T,CD8+ na\\u00efve T, CD8+ transitional effector T, CD8+ cytotoxic effector T,MAIT, NK,na\\u00efve B, memory B,classical mono,intermediate mono, non-classical mono,mDC, pDC\", \"rna_atac_input\": {\"__class__\": \"ConnectedValue\"}, \"umap_color\": \"celltype\", \"umap_frame_on\": \"true\", \"umap_legend_loc\": \"on data\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "4910c8c5-241c-47e1-ac87-0638098fc649",
+            "workflow_outputs": [
+                {
+                    "label": "RNA ATAC Celltype UMAP Plot",
+                    "output_name": "celltype_umap_plot",
+                    "uuid": "b87337c2-c666-409a-9017-6057f19fb5eb"
+                },
+                {
+                    "label": "RNA ATAC with Assigned Celltype Labels",
+                    "output_name": "rna_atac_assigned_celltype_labels",
+                    "uuid": "fc68fd52-fafb-4adf-b26c-afaa073b3806"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "visualise_markers_mudata",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "rna_atac_input": {
+                    "id": 5,
+                    "output_name": "rna_atac_assigned_celltype_labels"
+                }
+            },
+            "inputs": [],
+            "label": "Visualize Markers with MuData",
+            "name": "Visualize Markers with MuData",
+            "outputs": [
+                {
+                    "name": "rna_marker_genes",
+                    "type": "png"
+                },
+                {
+                    "name": "atac_marker_peaks",
+                    "type": "png"
+                },
+                {
+                    "name": "rna_atac_marker_genes_peaks",
+                    "type": "h5mu"
+                }
+            ],
+            "position": {
+                "left": 1315,
+                "top": 364.5
+            },
+            "post_job_actions": {},
+            "tool_id": "visualise_markers_mudata",
+            "tool_state": "{\"first_mod\": \"rna\", \"groupby\": \"leiden_joint\", \"marker_genes\": \"\", \"marker_peaks\": \"\", \"rna_atac_input\": {\"__class__\": \"ConnectedValue\"}, \"second_mod\": \"atac\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "cee90a20-47ac-4f73-80e6-82aede5a1c31",
+            "workflow_outputs": [
+                {
+                    "label": "RNA Marker Genes Plot",
+                    "output_name": "rna_marker_genes",
+                    "uuid": "b22f03f9-8f0b-4843-b50c-803cb5265be3"
+                },
+                {
+                    "label": "ATAC Marker Genes Plot",
+                    "output_name": "atac_marker_peaks",
+                    "uuid": "e07f81c1-bcac-40e6-bc3d-4ed63454231e"
+                },
+                {
+                    "label": "RNA ATAC with Marker Genes and Peaks",
+                    "output_name": "rna_atac_marker_genes_peaks",
+                    "uuid": "8468d57c-d970-4221-85c1-1b5075df97a9"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "76b90185-2d81-4cff-8f59-c6632c60c71b",
+    "version": 5
+}
