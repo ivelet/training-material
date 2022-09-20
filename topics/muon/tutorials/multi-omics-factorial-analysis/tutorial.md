@@ -249,6 +249,14 @@ of these to observe the marker genes and peaks for each respective modality.
 
 # Conclusion
 {:.no_toc}
+In this tutorial, we investigated single-cell multimodal data analysis. In particular, we used the library muon to perform 
+integrate RNA-seq and ATAC-seq data using muon then performed multi-omics factor analysis and clustering.
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This workflow used was typical for multimodal single-cell gene expression and chromatin accessibility analysis:
+1. Combine modalities to create multimodal data
+2. Compare cell-type annotations
+2. Perform multi-omics factor analysis
+3. Perform clustering on MOFA embeddings
+4. Rank and list differentially expressed genes and accessible peaks
+5. Cell-type annotation
+6. Visualize marker genes and peaks
