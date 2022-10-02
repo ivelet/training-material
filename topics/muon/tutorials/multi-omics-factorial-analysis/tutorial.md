@@ -2,8 +2,7 @@
 layout: tutorial_hands_on
 
 title: Single Cell Multi Omics Factorial Analysis with Muon
-zenodo_link: ''
-questions:
+Questions:
 - How to create multimodal data to combine multiple modalities?
 - How to perform multi-omics factorial analysis for single-cell RNA-seq and ATAC-seq integration? 
 - How to cluster multimodal data? 
@@ -11,7 +10,7 @@ questions:
 - How can cell type annotations be assigned to multimodal data? 
 - How to visualize marker genes and peaks for multimodal data?
 
-objectives:
+Objectives:
 - Describe the MuData object to store data with multiple modalities 
 - Combine multiple individual modalities into a single multimodal data object 
 - Perform multi-omics factorial analysis and integration 
@@ -86,7 +85,7 @@ complex datasets efficiently and to build new workflows and computational tools 
 multimodal information to be stored & accessed naturally, embrace AnnData for the individual modalities, and can be 
 serialized to .h5mu files. Learn more about multimodal objects as well as file formats for storing & sharing them. (LINK)
 
-Muon is a flagship framwwork for multimodal omics analysis. This is the framework we use in this tutorial to perform 
+Muon is a flagship framework for multimodal omics analysis. This is the framework we use in this tutorial to perform 
 multimodal analysis and this framework has been built around the MuData format. 
 
 
@@ -198,8 +197,6 @@ You may find out more from the official [MOFA website](https://biofam.github.io/
 >     - *"Components to plot (Plotting)"*: `1,2 . 3,4`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding
-
 As you can observe, this tool produces 4 output files. The first is a MuData object as a H5MU file. This is our original 
 file with the MOFA embeddings added. This is then used in the tool to produce plots directly using muon.pl.muon(). The tool 
 also produces a UMAP plot using ScanPy and two plots of the respective modalities from muon.pl.mofa(), which allows both 
@@ -209,9 +206,9 @@ trained from scratch.
 
 # Cluster MOFA Embeddings
 After the training, the embedding will be added to the `obsm`slot of the `MuData`.
-The produced h5mu MuData file produced from the MOFA tool in the last step will be the input file with the added 
-embeddings from the multiomics factor analysis added to the obsm slot of the MuData. These embeddings are very useful 
-now and can be used directly for plotting using both muon and scanpy as it contains both .obs and .obsm as needed for 
+The produced `h5mu` MuData file produced from the MOFA tool in the last step will be the input file with the added 
+embeddings from the multiomics factor analysis added to the `obsm` slot of the MuData. These embeddings are very useful 
+now and can be used directly for plotting using both muon and scanpy as it contains both `.obs` and `.obsm` as needed for 
 both libraries of plotting functions.
 
 We can now perform conventional clustering on the MOFA embeddings and can also visualize them on a UMAP. The individual 
@@ -287,7 +284,6 @@ marker genes and marker peaks defined in each modality respectively.
 
 
 # Conclusion
-{:.no_toc}
 In this tutorial, we investigated single-cell multimodal data analysis. In particular, we used the library muon to perform 
 integrate RNA-seq and ATAC-seq data using muon then performed multi-omics factor analysis and clustering.
 
